@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Suspense, useState } from 'react';
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Contact } from './pages/Contact';
-import { News } from './pages/News';
+import { Link, Route, Routes } from 'react-router-dom';
+import { Home } from 'pages/Home';
+import { ProtectedRouter } from './routers/ProtectedRouter';
+import { routes } from './ultils/routers';
 
 function App() {
+  const [user, setUser] = useState<boolean>(false);
+
+  const renderRoutes =
+    routes && routes.map((route, index) => <Route key={index} path={route.path} element={route.element} />);
   return (
     <div className="App">
       <h1>React router</h1>
@@ -42,11 +46,21 @@ function App() {
           </ul>
         </div>
       </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="news" element={<News />} />
-      </Routes>
+      <Suspense fallback={'loading...'}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<ProtectedRouter isAuth={user} />}>
+            {renderRoutes}
+          </Route>
+        </Routes>
+      </Suspense>
+      <div className="login">
+        {!user ? (
+          <button onClick={() => setUser(true)}>Login</button>
+        ) : (
+          <button onClick={() => setUser(false)}>Logout</button>
+        )}
+      </div>
     </div>
   );
 }
