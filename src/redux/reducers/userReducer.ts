@@ -1,6 +1,5 @@
-/* eslint-disable no-case-declarations */
 import * as actionTypes from '../actions/actionTypes';
-import { IUserAction, IUserState } from 'ultils/types';
+import { IUserAction, IUserState } from '../../ultils/types';
 
 const initialState: IUserState = {
   user: false,
