@@ -1,51 +1,31 @@
-import React, { Suspense, useState } from 'react';
-import './App.css';
-import { Link, Route, Routes } from 'react-router-dom';
-import { Home } from 'pages/Home';
+import React, { Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { Home } from 'pages/components/Home';
 import { ProtectedRouter } from './routers/ProtectedRouter';
 import { routes } from './ultils/routers';
+import './App.css';
+import { Menu } from 'components/Menu';
+import { Button } from 'components/Button';
+import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch } from './redux/hooks';
+import { login, logout } from 'redux/actions/actionCreators';
 
 function App() {
-  const [user, setUser] = useState<boolean>(false);
+  const user = useAppSelector((state) => state.userReducer.user);
+  const dispatch = useAppDispatch();
+  const handleLogin = () => {
+    dispatch(login(true));
+  };
 
+  const handleLogout = () => {
+    dispatch(logout(false));
+  };
   const renderRoutes =
     routes && routes.map((route, index) => <Route key={index} path={route.path} element={route.element} />);
   return (
     <div className="App">
       <h1>React router</h1>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/news">
-                News
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <Menu />
       <Suspense fallback={'loading...'}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -54,11 +34,11 @@ function App() {
           </Route>
         </Routes>
       </Suspense>
-      <div className="login">
+      <div className="login mt-2">
         {!user ? (
-          <button onClick={() => setUser(true)}>Login</button>
+          <Button handleClick={handleLogin} text="Login" />
         ) : (
-          <button onClick={() => setUser(false)}>Logout</button>
+          <Button handleClick={handleLogout} text="Logout" />
         )}
       </div>
     </div>

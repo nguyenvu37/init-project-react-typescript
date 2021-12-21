@@ -1,8 +1,8 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { lazy } from 'react';
 
-const Contact = lazy(() => import('../pages/Contact').then(({ Contact }) => ({ default: Contact })));
-const News = lazy(() => import('../pages/News').then(({ News }) => ({ default: News })));
+const Contact = lazy(() => import('../pages/components/Contact').then(({ Contact }) => ({ default: Contact })));
+const News = lazy(() => import('../pages/components/News').then(({ News }) => ({ default: News })));
 
 type RouteProps = {
   id: number;
