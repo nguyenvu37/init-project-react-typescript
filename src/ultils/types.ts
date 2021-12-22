@@ -1,8 +1,10 @@
-import { AnyAction } from 'redux';
-import { ImmutableObject } from 'seamless-immutable';
+// import { AnyAction } from 'redux';
+import { ImmutableArray, ImmutableObject } from 'seamless-immutable';
+import { FETCH_TODO, FETCH_TODO_SUCCESS, FETCH_TODO_FAILED } from './../redux/actions/actionTypes';
 export interface IButtonProps {
   handleClick: () => void;
   text: string;
+  customClass?: string;
 }
 
 export interface IUserState {
@@ -36,3 +38,40 @@ export interface INews {
     action: { type: string; payload: number },
   ): ImmutableObject<InitalStateNews>;
 }
+
+export interface ITodo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+export interface ITodoState {
+  pending: boolean;
+  todos: ITodo[] | ImmutableArray<never>;
+  error: number | null;
+}
+
+export interface FetchTodoSuccessPayload {
+  todos: ITodo[];
+}
+
+export interface FetchTodoFailurePayload {
+  error: number;
+}
+
+export interface FetchTodoRequest {
+  type: typeof FETCH_TODO;
+}
+
+export type FetchTodoSuccess = {
+  type: typeof FETCH_TODO_SUCCESS;
+  payload: FetchTodoSuccessPayload;
+};
+
+export type FetchTodoFailure = {
+  type: typeof FETCH_TODO_FAILED;
+  payload: FetchTodoFailurePayload;
+};
+
+export type TodoActions = FetchTodoRequest | FetchTodoSuccess | FetchTodoFailure;

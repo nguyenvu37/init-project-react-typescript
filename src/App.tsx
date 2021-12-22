@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { Home } from 'pages/components/Home';
 import { ProtectedRouter } from './routers/ProtectedRouter';
 import { routes } from './ultils/routers';
-import './App.css';
+import './App.scss';
 import { Menu } from 'components/Menu';
 import { Button } from 'components/Button';
 import { useAppSelector } from 'redux/hooks';
@@ -20,6 +20,7 @@ function App() {
   const handleLogout = () => {
     dispatch(logout(false));
   };
+
   const renderRoutes =
     routes && routes.map((route, index) => <Route key={index} path={route.path} element={route.element} />);
   return (

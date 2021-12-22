@@ -1,0 +1,22 @@
+.todo-list {
+  width: 100%;
+
+  .form-todo {
+    justify-content: center;
+    width: 100%;
+
+    .form-group {
+      width: 80%;
+    }
+
+    button {
+      background-color: $primary !important;
+      border: 1px solid $primary;
+    }
+  }
+
+  .list {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
