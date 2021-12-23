@@ -53,21 +53,21 @@ export const INITIAL_STATE: ImmutableObject<ITodoState> = Immutable({
   count: 1,
 });
 
-const fetchTodo: ITodos = (state) =>
-  state.merge({
+const fetchTodo: ITodos = (state = INITIAL_STATE) =>
+  Immutable(state).merge({
     pending: true,
     count: state.count + 1,
   });
 
-const fetchTodoSuccess: ITodos = (state, action) =>
-  state.merge({
+const fetchTodoSuccess: ITodos = (state = INITIAL_STATE, action) =>
+  Immutable(state).merge({
     pending: false,
     todos: action.payload.todos,
     error: null,
   });
 
-const fetchTodoFailed: ITodos = (state, action) =>
-  state.merge({
+const fetchTodoFailed: ITodos = (state = INITIAL_STATE, action) =>
+  Immutable(state).merge({
     pending: false,
     todos: [],
     error: action.payload.error,
