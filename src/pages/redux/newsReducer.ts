@@ -14,18 +14,16 @@ export const INITIAL_STATE: InitalStateNews = Immutable({
 });
 
 const increment: INews = (state, action) => {
-  const num: number = state.count + action.payload;
   return state.merge({
     type: action.type,
-    count: num,
+    count: state.count + action.payload,
   });
 };
 
 const descrement: INews = (state, action) => {
-  const num = state.count - action.payload;
   return state.merge({
     type: action.type,
-    count: num,
+    count: state.count - action.payload,
   });
 };
 

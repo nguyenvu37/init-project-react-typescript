@@ -1,5 +1,5 @@
 // import { AnyAction } from 'redux';
-import { ImmutableArray, ImmutableObject } from 'seamless-immutable';
+import { ImmutableObject } from 'seamless-immutable';
 import { FETCH_TODO, FETCH_TODO_SUCCESS, FETCH_TODO_FAILED } from './../redux/actions/actionTypes';
 export interface IButtonProps {
   handleClick: () => void;
@@ -46,10 +46,19 @@ export interface ITodo {
   completed: boolean;
 }
 
+export interface IObj {
+  count: number;
+}
+
 export interface ITodoState {
   pending: boolean;
-  todos: ITodo[] | ImmutableArray<never>;
-  error: number | null;
+  todos?: ITodo[];
+  error?: number | null;
+  count: number;
+}
+
+export interface ITodos {
+  (state: ImmutableObject<ITodoState>, action: { type: string; payload: ITodoState }): ImmutableObject<ITodoState>;
 }
 
 export interface FetchTodoSuccessPayload {

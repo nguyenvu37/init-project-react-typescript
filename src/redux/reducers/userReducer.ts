@@ -1,10 +1,9 @@
 import * as actionTypes from '../actions/actionTypes';
 import { IUserAction, IUserState } from '../../ultils/types';
-import Immutable from 'seamless-immutable';
 
-const initialState: IUserState = Immutable({
+const initialState: IUserState = {
   user: false,
-});
+};
 
 const userReducer = (state: IUserState = initialState, action: IUserAction) => {
   switch (action.type) {

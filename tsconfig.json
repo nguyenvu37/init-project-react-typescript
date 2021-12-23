@@ -11,15 +11,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
-    "paths": {
-      "modules/*": ["./src/modules"],
-      "assets/*": ["./src/assets"],
-      "constants/*": ["./src/constants"],
-      "themes/*": ["./src/themes"],
-      "commons/*": ["./src/commons/"],
-      "helpers/*": ["./src/helpers/"]
-    }
+    "baseUrl": "./src"
   },
   "include": ["src"]
 }

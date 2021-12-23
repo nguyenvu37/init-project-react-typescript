@@ -20,7 +20,7 @@ export default () => {
   const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['userReducer', 'todosReducer'],
+    whitelist: ['userReducer'],
   };
 
   const __DEV__ = process.env.NODE_ENV !== 'production';
