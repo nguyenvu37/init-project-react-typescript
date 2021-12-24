@@ -6,6 +6,7 @@ import { createLogger } from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import appReducers from './rootReducers';
+import { seamlessImmutableReconciler } from 'redux-persist-seamless-immutable';
 
 declare global {
   interface Window {
@@ -20,6 +21,7 @@ export default () => {
   const persistConfig = {
     key: 'root',
     storage,
+    stateReconciler: seamlessImmutableReconciler,
     whitelist: ['userReducer', 'todosReducer'],
   };
 
